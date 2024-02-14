@@ -1,4 +1,5 @@
-import { NavigatorScreenParams } from "@react-navigation/native"
+import { CompositeNavigationProp, NavigatorScreenParams } from "@react-navigation/native"
+import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
 /**
  * All the screens in the AuthStack
@@ -43,6 +44,11 @@ export type RootStackParamList = {
    AppStack: NavigatorScreenParams<AppStackParamList>
    AuthStack: NavigatorScreenParams<AuthStackParamList>
 }
+
+export type AuthScreenNavigation <RouteName extends keyof AuthStackParamList> =
+   CompositeNavigationProp<
+      NativeStackNavigationProp<AuthStackParamList, RouteName>,
+      NativeStackNavigationProp<AppStackParamList, "Root">>
 
 /**
  * Convention -> declare global namespace for the useNavigation()
