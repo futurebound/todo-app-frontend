@@ -1,11 +1,14 @@
+import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { Box, Text } from "@/utils/theme"
 
 
 const CompletedTaskScreen = () => {
    return (
-      <Box>
-         <Text>Completed Task Screen</Text>
-      </Box>
+      <SafeAreaWrapper>
+         <Box>
+            <Text>Completed Task Screen</Text>
+         </Box>
+      </SafeAreaWrapper>
    )
 }
 

@@ -2,14 +2,14 @@ import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { Box, Text } from "@/utils/theme"
 
 
-const TodayTaskScreen = () => {
+const CategoryScreen = () => {
    return (
       <SafeAreaWrapper>
          <Box>
-            <Text>Today's Tasks Screen</Text>
+            <Text>Category Screen</Text>
          </Box>
       </SafeAreaWrapper>
    )
 }
 
-export default TodayTaskScreen
+export default CategoryScreen
