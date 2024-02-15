@@ -10,9 +10,15 @@ const AuthStackNavigator = () => {
    return (
       <Stack.Navigator>
          {/* order of components determines which screen initially loads */}
-         <Stack.Screen name="Welcome" component={WelcomeScreen}/>
-         <Stack.Screen name="SignIn" component={SignInScreen}/>
-         <Stack.Screen name="SignUp" component={SignUpScreen}/>
+         <Stack.Screen name="Welcome" component={WelcomeScreen}
+            options={{ headerShown: false }}
+         />
+         <Stack.Screen name="SignIn" component={SignInScreen}
+            // options={{ headerShown: false }}
+         />
+         <Stack.Screen name="SignUp" component={SignUpScreen}
+            // options={{ headerShown: false }}
+         />
       </Stack.Navigator>
    )
 }

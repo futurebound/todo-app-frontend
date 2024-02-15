@@ -1,18 +1,33 @@
 import { NavigationContainer } from '@react-navigation/native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import AuthStackNavigator from './auth-stack-navigator'
 import AppStackNavigator from './app-stack-navigator'
+import useUserGlobalStore from '@/store/useUserGlobalStore'
 
 const Navigation = () => {
-   // this will hold info about whether a logged in user or not
-   const userIsLoggedIn = true
+   const {user, updateUser} = useUserGlobalStore()
+
+   /* testing code to confirm that able to update app state with zustand
+      and that we can log a user in properly
+   */
+   console.log(`user`, JSON.stringify(user, null, 2))
+   useEffect(() => {
+      // TEST: simulate user NOT logged in -> should <AuthStackNavigator />
+      updateUser(null)
+
+      // TEST: simulate user logged in -> should <AppStackNavigator />
+      // updateUser({
+      //    email: "test@gmail.com",
+      //    name: "n1"
+      // })
+      return () => {}
+   }, [])
+
 
    return (
-      // wrap whole nav section in NavContainer component
       <NavigationContainer>
-         {/* conditionally render AppStack || AuthStack */}
-         {/* <AuthStackNavigator /> */}
-         <AppStackNavigator />
+         {/* conditionally render App (if logged in) or Auth (if not) */}
+         { user ? <AppStackNavigator /> : <AuthStackNavigator /> }
          
       </NavigationContainer>
    )

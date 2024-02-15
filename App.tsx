@@ -1,4 +1,5 @@
 import Navigation from '@/navigation';
+import useUserGlobalStore from '@/store/useUserGlobalStore';
 import theme from '@/utils/theme';
 import { ThemeProvider } from '@shopify/restyle';
 import { StatusBar } from 'expo-status-bar';
@@ -11,6 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
  *  corner of the screen is a viable place to put stuff
  */
 export default function App() {
+
   return (
     <ThemeProvider theme={theme}>
       <SafeAreaProvider>
