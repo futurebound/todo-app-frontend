@@ -9,6 +9,14 @@ module.exports = function(api) {
           alias: {
             "@": "./src"
           }
+        },
+      ],
+      [
+        "module:react-native-dotenv",
+        {
+          envName: "APP_ENV",
+          moduleName: "@env",
+          path: ".env"
         }
       ]
     ]

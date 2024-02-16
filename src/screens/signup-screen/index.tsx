@@ -8,6 +8,7 @@ import { Pressable } from "react-native"
 import { IUser } from "@/types"
 import { registerUser } from "@/services/api"
 import { Controller, useForm } from "react-hook-form"
+import axios from "axios"
 
 const SignUpScreen = () => {
    const navigation = useNavigation<AuthScreenNavigation<"SignUp">>()
@@ -36,6 +37,25 @@ const SignUpScreen = () => {
          navigateToSignInScreen()
       } catch (error) {
          console.log("error in onSubmit()", error)
+      }
+   }
+
+   
+   const onSubmitTestAxiosCreateUser = async (data: IUser) => {
+      try {
+         const { email, name, password } = data
+         console.log(`data`, JSON.stringify(data, null, 2))
+         // const response = await axios.post("http://localhost:3000/user/create", {
+         const response = await axios.post("https://9f58-50-34-35-210.ngrok-free.app/user/create", {
+            name: name,
+            email: email,
+            password: password
+         })
+         if (response.status === 201) {
+            console.log(`You have logged in as: ${JSON.stringify(response.data)}`)
+         }
+      } catch (error) {
+         console.log("error in onSubmitTestAxiosLogin()", error)
       }
    }
 
@@ -81,6 +101,8 @@ const SignUpScreen = () => {
             </Pressable>
             
             <Button label="register" onPress={handleSubmit(onSubmit)} uppercase/>
+            {/* <Button label="register" onPress={handleSubmit(onSubmitTestAxiosCreateUser)} uppercase/> */}
+            {/* <Button label="register" onPress={handleSubmit(onSubmitTestAxiosGetAPI)} uppercase/> */}
          </Box>
       </SafeAreaWrapper>
    )

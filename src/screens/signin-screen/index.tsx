@@ -9,6 +9,7 @@ import Button from "@/components/shared/button"
 import { IUser } from "@/types"
 import { loginUser } from "@/services/api"
 import useUserGlobalStore from "@/store/useUserGlobalStore"
+import axios from "axios"
 
 const SignInScreen = () => {
    const navigation = useNavigation<AuthScreenNavigation<"SignIn">>()
@@ -42,6 +43,21 @@ const SignInScreen = () => {
       } catch (error) {
          console.log("error in signin/onSubmit()")
          throw error
+      }
+   }
+
+   const onSubmitTestAxiosLogin = async (data: IUser) => {
+      try {
+         const { email, name, password } = data
+         const response = await axios.post("http://localhost:3000/user/login", {
+            email: email,
+            password: password
+         })
+         if (response.status === 201) {
+            console.log(`You have logged in as: ${JSON.stringify(response.data)}`)
+         }
+      } catch (error) {
+         console.log("error in onSubmitTestAxiosLogin()", error)
       }
    }
 
