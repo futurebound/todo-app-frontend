@@ -1,6 +1,8 @@
 import Button from "@/components/shared/button"
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { AuthScreenNavigation } from "@/navigation/types"
+import { registerUser } from "@/services/api"
+import { IUser } from "@/types"
 import { Box, Text } from "@/utils/theme"
 import { useNavigation } from "@react-navigation/native"
 import { LinearGradient } from "expo-linear-gradient"
@@ -15,7 +17,7 @@ const WelcomeScreen = () => {
    const navigateToSignUpScreen = () => {
       navigation.navigate("SignUp")
    }
-
+   
 
    return (
       <SafeAreaWrapper>

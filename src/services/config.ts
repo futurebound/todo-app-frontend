@@ -3,8 +3,8 @@ import * as SecureStore from "expo-secure-store"
 
 
 export const BASE_URL = "http://localhost:3000/"
-const TIMEOUT = 30000
-const USER_TOKEN_NAME = "user_token"
+const TIMEOUT = 60000
+export const USER_TOKEN_NAME = "user_token"
 
 const axiosInstance = axios.create({
    baseURL: BASE_URL,
@@ -40,5 +40,6 @@ export const saveToken = async (key: string, value: string) => {
 // fetcher function for SWR
 export const fetcher = (url : string) => 
    axiosInstance.get(url).then((res) => res.data)
+
 
 export default axiosInstance

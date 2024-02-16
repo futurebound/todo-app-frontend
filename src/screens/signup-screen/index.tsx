@@ -5,6 +5,9 @@ import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import Input from "@/components/shared/input"
 import Button from "@/components/shared/button"
 import { Pressable } from "react-native"
+import { IUser } from "@/types"
+import { registerUser } from "@/services/api"
+import { Controller, useForm } from "react-hook-form"
 
 const SignUpScreen = () => {
    const navigation = useNavigation<AuthScreenNavigation<"SignUp">>()
@@ -12,16 +15,64 @@ const SignUpScreen = () => {
       navigation.navigate("SignIn")
    }
 
+   const {
+      control, handleSubmit, formState: {errors}
+   } = useForm<IUser>({
+      defaultValues: {
+         email: "",
+         password: ""
+      }
+   })
+
+   const onSubmit = async (data: IUser) => {
+      try {
+         const { email, name, password } = data
+         console.log(`data`, JSON.stringify(data, null, 2))
+         await registerUser({
+            email: email, 
+            name: name, 
+            password: password
+         })
+         navigateToSignInScreen()
+      } catch (error) {
+         console.log("error in onSubmit()", error)
+      }
+   }
+
    return (
       <SafeAreaWrapper>
          <Box flex={1} px="5" mt="10">
             <Text variant="textXl" fontWeight="500" mb="6">
-               Welcome to ToDone
+               Welcome to GamerDo
             </Text>
 
-            <Input label="USERNAME" placeholder="Username"/>
-            <Input label="EMAIL" placeholder="email"/>
-            <Input label="PASSWORD" placeholder="password"/>
+            <Controller
+               control={control}
+               rules={{ required: true }}
+               render={({ field: { onChange, onBlur, value } }) => (
+                  <Input label="Name" placeholder="Name" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.name}/>
+               )}
+               name="name"
+            />
+            <Controller
+               control={control}
+               rules={{ required: true }}
+               render={({ field: { onChange, onBlur, value } }) => (
+                  <Input label="Email" placeholder="Email" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.email}/>
+               )}
+               name="email"
+            />
+            <Controller
+               control={control}
+               rules={{ required: true }}
+               render={({ field: { onChange, onBlur, value } }) => (
+                  <Input label="Password" placeholder="Password" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.email}/>
+               )}
+               name="password"
+            />
+
+            {/* <Input label="EMAIL" placeholder="email"/>
+            <Input label="PASSWORD" placeholder="password"/> */}
 
             <Pressable onPress={navigateToSignInScreen}>
                <Text color="primary" textAlign="right">
@@ -29,7 +80,7 @@ const SignUpScreen = () => {
                </Text>
             </Pressable>
             
-            <Button label="register" onPress={navigateToSignInScreen} uppercase/>
+            <Button label="register" onPress={handleSubmit(onSubmit)} uppercase/>
          </Box>
       </SafeAreaWrapper>
    )
