@@ -3,7 +3,7 @@ import * as SecureStore from "expo-secure-store"
 // import REACT_APP_DEV_BASE_URL from "@env"
 
 // export const BASE_URL = "http://localhost:3000/"
-export const BASE_URL = "https://9f58-50-34-35-210.ngrok-free.app"
+export const BASE_URL = "https://d687-50-34-35-210.ngrok-free.app/"
 // export const BASE_URL = REACT_APP_DEV_BASE_URL
 const TIMEOUT = 30000
 export const USER_TOKEN_NAME = "user_token"
@@ -16,7 +16,6 @@ const axiosInstance = axios.create({
 // define interceptors on this axios instance
 axiosInstance.interceptors.request.use(async (req) => {
    try {
-      console.log("BASE_URL: " + BASE_URL)
       // try getting authenticated user token from local storage
       const accessToken = await SecureStore.getItemAsync(USER_TOKEN_NAME)
       req.headers.Authorization = accessToken

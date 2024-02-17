@@ -1,3 +1,4 @@
+import { ICategory } from "@/types"
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs"
 import { CompositeNavigationProp, CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native"
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack"
@@ -44,7 +45,7 @@ export type CategoriesStackParamList = {
       id: string
    }
    CreateCategory: {
-      id?: string // id? makes optional
+      category?: ICategory // id? makes optional
    }
 }
 

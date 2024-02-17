@@ -46,20 +46,6 @@ const SignInScreen = () => {
       }
    }
 
-   const onSubmitTestAxiosLogin = async (data: IUser) => {
-      try {
-         const { email, name, password } = data
-         const response = await axios.post("http://localhost:3000/user/login", {
-            email: email,
-            password: password
-         })
-         if (response.status === 201) {
-            console.log(`You have logged in as: ${JSON.stringify(response.data)}`)
-         }
-      } catch (error) {
-         console.log("error in onSubmitTestAxiosLogin()", error)
-      }
-   }
 
    return (
       <SafeAreaWrapper>
@@ -71,7 +57,7 @@ const SignInScreen = () => {
             <Controller 
                control={control} 
                rules={{ required: true }} 
-               render={( { field: {onChange, onBlur, value } }) => (
+               render={( { field: { onChange, onBlur, value } }) => (
                   <Input label="Email" placeholder="Email" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.email}/>
                )}
                name="email"

@@ -8,7 +8,7 @@ export const registerUser = async ({
       name, email, password
 } : RegisterUserTypes) => {
    try {
-      const response = await axiosInstance.post("/user/create", {
+      const response = await axiosInstance.post("user/create", {
          name, email, password
       })
       return response.data.user
@@ -26,7 +26,7 @@ type LoginUserTypes = Omit<IUser, "name">
 
 export const loginUser = async ({ email, password } : LoginUserTypes) => {
    try {
-      const response = await axiosInstance.post("/user/login", {
+      const response = await axiosInstance.post("user/login", {
          email, password
       })
 
