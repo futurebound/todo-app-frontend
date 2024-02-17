@@ -9,9 +9,7 @@ const AppStackNavigator = () => {
    return (
       <Stack.Navigator>
          <Stack.Screen name="Root" component={BottomTabNavigator} 
-            options={{
-               headerShown: false
-            }}
+            options={{ headerShown: false }}
          />
       </Stack.Navigator>
    )

@@ -10,14 +10,10 @@ const HomeStackNavigator = () => {
       <Stack.Navigator>
          <Stack.Screen name="Home" component={HomeScreen} 
             // while on this screen just hides
-            // options={{
-            //    headerShown: false 
-            // }}
+            options={{ headerShown: false }}
          />
          <Stack.Screen name="EditTask" component={EditTaskScreen} 
-            // options={{
-            //    headerShown: false
-            // }}
+            options={{ headerShown: false }}
          />
       </Stack.Navigator>
    )

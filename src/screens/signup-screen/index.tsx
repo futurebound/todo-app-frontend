@@ -36,7 +36,7 @@ const SignUpScreen = () => {
          })
          navigateToSignInScreen()
       } catch (error) {
-         console.log("error in onSubmit()", error)
+         console.log("error in SignUp.onSubmit()", error)
       }
    }
 
@@ -45,8 +45,7 @@ const SignUpScreen = () => {
       try {
          const { email, name, password } = data
          console.log(`data`, JSON.stringify(data, null, 2))
-         // const response = await axios.post("http://localhost:3000/user/create", {
-         const response = await axios.post("https://9f58-50-34-35-210.ngrok-free.app/user/create", {
+         const response = await axios.post("http://localhost:3000/user/create", {
             name: name,
             email: email,
             password: password

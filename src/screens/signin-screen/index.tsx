@@ -10,6 +10,7 @@ import { IUser } from "@/types"
 import { loginUser } from "@/services/api"
 import useUserGlobalStore from "@/store/useUserGlobalStore"
 import axios from "axios"
+import { Controller, useForm } from "react-hook-form"
 
 const SignInScreen = () => {
    const navigation = useNavigation<AuthScreenNavigation<"SignIn">>()
@@ -17,16 +18,15 @@ const SignInScreen = () => {
       navigation.navigate("SignUp")
    }
 
-   // const {
-   //    control, handleSubmit, formState: { errors }
-   // } = useForm<Omit<IUser, "name">>({
-   //    defaultValues: {
-   //       email: "",
-   //       password: ""
-   //    }
-   // })
-
    const { updateUser } = useUserGlobalStore()
+   const {
+      control, handleSubmit, formState: { errors }
+   } = useForm<Omit<IUser, "name">>({
+      defaultValues: {
+         email: "",
+         password: ""
+      }
+   })
 
    const onSubmit = async(data: Omit<IUser, "name">) => {
       try {
@@ -41,7 +41,7 @@ const SignInScreen = () => {
             email: _user.email
          })
       } catch (error) {
-         console.log("error in signin/onSubmit()")
+         console.log("error in signin.onSubmit()")
          throw error
       }
    }
@@ -68,8 +68,23 @@ const SignInScreen = () => {
                Welcome back!
             </Text>
 
-            <Input label="EMAIL" placeholder="email"/>
-            <Input label="PASSWORD" placeholder="password"/>
+            <Controller 
+               control={control} 
+               rules={{ required: true }} 
+               render={( { field: {onChange, onBlur, value } }) => (
+                  <Input label="Email" placeholder="Email" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.email}/>
+               )}
+               name="email"
+            />
+
+            <Controller 
+               control={control} 
+               rules={{ required: true }} 
+               render={( { field: {onChange, onBlur, value } }) => (
+                  <Input label="Password" placeholder="Password" onBlur={onBlur} onChangeText={onChange} value={value} error={errors.password} secureTextEntry/>
+               )}
+               name="password"
+            />
 
             <Pressable onPress={navigateToSignUpScreen}>
                <Text color="primary" textAlign="right">
@@ -77,7 +92,7 @@ const SignInScreen = () => {
                </Text>
             </Pressable>
             
-            <Button label="login" onPress={navigateToSignUpScreen} uppercase/>
+            <Button label="login" onPress={handleSubmit(onSubmit)} uppercase/>
          </Box>
       </SafeAreaWrapper>
    )

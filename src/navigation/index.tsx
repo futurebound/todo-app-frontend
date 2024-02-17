@@ -10,7 +10,8 @@ const Navigation = () => {
    /* testing code to confirm that able to update app state with zustand
       and that we can log a user in properly
    */
-   // console.log(`user`, JSON.stringify(user, null, 2))
+   console.log(`user`, JSON.stringify(user, null, 2))
+   // DEV TOOL: toggle this to force logout user
    // useEffect(() => {
    //    // TEST: simulate user NOT logged in -> should <AuthStackNavigator />
    //    updateUser(null)
@@ -22,7 +23,6 @@ const Navigation = () => {
    //    // })
    //    return () => {}
    // }, [])
-
 
    return (
       <NavigationContainer>
