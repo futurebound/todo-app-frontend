@@ -1,8 +1,8 @@
 import Button from "@/components/shared/button"
 import NavigateBack from "@/components/shared/navigate-back"
 import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
-import { CategoriesStackParamList } from "@/navigation/types"
-import axiosInstance, { BASE_URL } from "@/services/config"
+import { CategoriesNavigationType, CategoriesStackParamList } from "@/navigation/types"
+import axiosInstance, { BASE_URL, fetcher } from "@/services/config"
 import { ICategory, ICategoryRequest, IColor, IIcon } from "@/types"
 import { getColors, getIcons } from "@/utils/helpers"
 import { Box, Text, Theme } from "@/utils/theme"
@@ -10,7 +10,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useTheme } from "@shopify/restyle"
 import React, { useState } from "react"
 import { Pressable, TextInput } from "react-native"
-import { useSWRConfig } from "swr"
+import useSWR, { useSWRConfig } from "swr"
 import useSWRMutation from "swr/mutation"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
@@ -56,7 +56,9 @@ type CreateCategoryRouteTypes = RouteProp<CategoriesStackParamList, "CreateCateg
 
 const CreateCategoryScreen = () => {
    const theme = useTheme<Theme>()
-   const navigation = useNavigation()
+   // const navigation = useNavigation()
+   const navigation = useNavigation<CategoriesNavigationType>()
+   // const {data, isLoading, error } = useSWR<ICategory[]>("category/getAll", fetcher)
 
    const route = useRoute<CreateCategoryRouteTypes>()
    const isEditing = route.params.category ? true : false
@@ -90,7 +92,9 @@ const CreateCategoryScreen = () => {
 
          await mutate(BASE_URL + "category")
          // TODO: navigate back to category screen in a way that triggers /category/getAll
-         navigation.goBack()
+         // navigation.goBack()
+         axiosInstance.get
+         navigation.navigate("Categories")
 
       } catch (error) {
          console.log("error in createNewCategory()", error)

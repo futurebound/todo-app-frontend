@@ -5,6 +5,7 @@ import SafeAreaWrapper from "@/components/shared/safe-area-wrapper"
 import { fetcher } from "@/services/config"
 import { ICategory } from "@/types"
 import { Box, Text } from "@/utils/theme"
+import { useEffect } from "react"
 import { FlatList } from "react-native"
 import useSWR from "swr"
 
@@ -19,6 +20,7 @@ const CategoriesScreen = () => {
    const renderItem = ({ item }: { item: ICategory }) => (
       <Category category={item} />
    )
+
    
    return (
       <SafeAreaWrapper>
